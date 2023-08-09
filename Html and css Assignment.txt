@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trainee Registration</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+  }
+  label {
+    font-weight: bold;
+  }
+  select {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h2>Trainee Registration</h2>
+  <form>
+    <label for="empNumber">Employee Number (6 digits):</label>
+    <input type="number" id="empNumber" name="empNumber" required minlength="6" maxlength="6"><br>
+    
+    <label for="traineeName">Trainee Name (Max 30 letters):</label>
+    <input type="text" id="traineeName" name="traineeName" required maxlength="30"><br>
+    
+    <label for="domain">Domain:</label>
+    <select id="domain" name="domain" required>
+      <option value="" disabled selected>Select Domain</option>
+      <option value="JEE">JEE</option>
+      <option value=".NET">.NET</option>
+    </select><br>
+    
+    <label for="moduleName">Module Name:</label>
+    <select id="moduleName" name="moduleName" required disabled>
+      <option value="" disabled selected>Select Module</option>
+    </select><br>
+    
+    <button type="submit">Submit</button>
+  </form>
+</div>
+<script>
+  const domainSelect = document.getElementById("domain");
+  const moduleSelect = document.getElementById("moduleName");
+  
+  domainSelect.addEventListener("change", function() {
+    moduleSelect.disabled = false;
+    moduleSelect.innerHTML = "<option value='' disabled selected>Select Module</option>";
+    if (domainSelect.value === "JEE") {
+      const jeeModules = ["Core Java", "Servlet-JSP", "Spring"];
+      populateDropdown(jeeModules);
+    } else if (domainSelect.value === ".NET") {
+      const netModules = ["C#"];
+      populateDropdown(netModules);
+    }
+  });
+  
+  function populateDropdown(moduleNames) {
+    moduleNames.forEach(moduleName => {
+      const option = document.createElement("option");
+      option.value = moduleName;
+      option.textContent = moduleName;
+      moduleSelect.appendChild(option);
+    });
+  }
+</script>
+</body>
+</html>
